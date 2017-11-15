@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артём Абрамянц](https://up.htmlacademy.ru/javascript/11/user/262023).
-
+* Наставник: [Олег Петров](https://htmlacademy.ru/profile/fyvfyv).
 ---
 
 _Не удаляйте и не обращайте внимание на папки и файлы:_<br>
