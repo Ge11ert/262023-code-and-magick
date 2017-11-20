@@ -72,12 +72,14 @@ window.renderStatistics = function (ctx, names, times) {
         var testLine = text + word + ' ';
         var testLineWidth = context.measureText(testLine).width;
         if (testLineWidth > textWidth) {
-          context.fillText(text, initialX, initialY + indentY);
           text = word + ' ';
           indentY += lineHeight;
         } else {
           text = testLine;
         }
+        context.fillStyle = 'white';
+        context.fillRect(initialX, initialY - lineHeight + indentY + 5, testLineWidth, lineHeight);
+        context.fillStyle = '#000000';
         context.fillText(text, initialX, initialY + indentY);
       });
     } else {
