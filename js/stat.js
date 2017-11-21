@@ -8,7 +8,7 @@
 window.renderStatistics = function (ctx, names, times) {
   /**
    * Parameters of the statistics window
-   * @enum {number}
+   * @enum {number} StatsCloudParams
    */
   var StatsCloudParams = {
     WIDTH: 420,
@@ -19,7 +19,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   /**
    * Parameters of a single histogram column
-   * @enum {number}
+   * @enum {number} HistParams
    */
   var HistParams = {
     WIDTH: 40,
