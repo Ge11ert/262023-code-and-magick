@@ -6,19 +6,27 @@
  * @param {Array} times - Times of game passing
  */
 window.renderStatistics = function (ctx, names, times) {
-  var statsCloudParams = {
-    width: 420,
-    height: 270,
-    initialX: 100,
-    initialY: 10
+  /**
+   * Parameters of the statistics window
+   * @enum {number}
+   */
+  var StatsCloudParams = {
+    WIDTH: 420,
+    HEIGHT: 270,
+    INITIAL_X: 100,
+    INITIAL_Y: 10
   };
 
-  var histParams = {
-    width: 40,
-    height: 150,
-    indent: 50,
-    initialX: 150,
-    initialY: 90
+  /**
+   * Parameters of a single histogram column
+   * @enum {number}
+   */
+  var HistParams = {
+    WIDTH: 40,
+    HEIGHT: 150,
+    INDENT: 50,
+    INITIAL_X: 150,
+    INITIAL_Y: 90
   };
 
   var headerText = 'Ура, вы победили! Список результатов:';
@@ -27,10 +35,7 @@ window.renderStatistics = function (ctx, names, times) {
   var nameYPosition = 270;
 
   var maxTime = getMaxFromArray(times);
-  var scale = histParams.height / maxTime;
-
-  var maxColorOpacity = 1;
-  var minColorOpacity = 0.2;
+  var scale = HistParams.HEIGHT / maxTime;
 
   /**
    * Draws a histogram bar with score of a player
@@ -40,14 +45,15 @@ window.renderStatistics = function (ctx, names, times) {
    */
   function drawHistogramBar(time, name, i) {
     var height = time * scale;
-    var indentX = (histParams.width + histParams.indent) * i;
-    var indentY = histParams.height - height;
+    var indentX = (HistParams.WIDTH + HistParams.INDENT) * i;
+    var indentY = HistParams.HEIGHT - height;
+    var randomOpacity = getRandomFromRange(0.2, 1);
 
-    ctx.fillText(time.toFixed(), histParams.initialX + indentX, histParams.initialY + indentY);
-    ctx.fillStyle = (name === 'Вы') ? 'rgba(255, 0, 0, 1)' : getRandomBlue();
-    ctx.fillRect(histParams.initialX + indentX, histParams.initialY + indentY + 10, histParams.width, height);
+    ctx.fillText(time.toFixed(), HistParams.INITIAL_X + indentX, HistParams.INITIAL_Y + indentY);
+    ctx.fillStyle = (name === 'Вы') ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0, 255, ' + randomOpacity + ')';
+    ctx.fillRect(HistParams.INITIAL_X + indentX, HistParams.INITIAL_Y + indentY + 10, HistParams.WIDTH, height);
     ctx.fillStyle = '#000000';
-    ctx.fillText(name, histParams.initialX + indentX, nameYPosition);
+    ctx.fillText(name, HistParams.INITIAL_X + indentX, nameYPosition);
   }
 
   /**
@@ -97,12 +103,13 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   /**
-   * Generates blue color with random opacity
-   * @return {string} - Blue color in RGBA format
+   * Returns a random number between min and max
+   * @param {number} min
+   * @param {number} max
+   * @return {number}
    */
-  function getRandomBlue() {
-    var randomOpacity = Math.random() * (maxColorOpacity - minColorOpacity) + minColorOpacity;
-    return 'rgba(0, 0, 255, ' + randomOpacity + ')';
+  function getRandomFromRange(min, max) {
+    return Math.random() * (max - min) + min;
   }
 
   // Drop Shadow for stats rectangle
@@ -112,8 +119,8 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Draw stats rectangle
   ctx.fillStyle = 'white';
-  ctx.strokeRect(statsCloudParams.initialX, statsCloudParams.initialY, statsCloudParams.width, statsCloudParams.height);
-  ctx.fillRect(statsCloudParams.initialX, statsCloudParams.initialY, statsCloudParams.width, statsCloudParams.height);
+  ctx.strokeRect(StatsCloudParams.INITIAL_X, StatsCloudParams.INITIAL_Y, StatsCloudParams.WIDTH, StatsCloudParams.HEIGHT);
+  ctx.fillRect(StatsCloudParams.INITIAL_X, StatsCloudParams.INITIAL_Y, StatsCloudParams.WIDTH, StatsCloudParams.HEIGHT);
 
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
