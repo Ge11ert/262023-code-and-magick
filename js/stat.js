@@ -95,7 +95,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   /**
    * Returns max element of a numerical Array
-   * @param {Array} numArray - Array of numbers
+   * @param {Array.<number>} numArray
    * @return {number}
    */
   function getMaxFromArray(numArray) {
